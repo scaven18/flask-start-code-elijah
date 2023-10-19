@@ -6,6 +6,36 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <p>Main page here</p>
+    <form action="/new_todo" method="POST">
+        <input type="text" placeholder="Write your todo" name="todo">
+        <input type="submit">
+    </form>
+
+    <h4>My Items </h4>
+    <div>
+        {% for todo in todos %}
+            {% if not todo.complete %}
+                <span> {{ todo.item }} </span>
+                <span> 
+                    <a href="/update/{{todo.id}}"> complete</a>
+                </span>
+                <span> 
+                    <a href="/delete/{{todo.id}}"> delete</a>
+                </span>
+                <br>
+            {% else %}
+                <span> <strike> {{ todo.item }} </strike> </span>
+                <span> 
+                    <a href="/update/{{todo.id}}"> un-complete</a>
+                </span>
+                <span> 
+                    <a href="/delete/{{todo.id}}"> delete</a>
+                </span>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+
 </body>
 </html>
